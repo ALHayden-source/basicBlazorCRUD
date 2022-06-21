@@ -1,0 +1,125 @@
+﻿@using WireFrame.Data
+@page "/addrecord"
+@inject IRecordService RecordService
+@inject NavigationManager NavigationManager
+
+<p style="text-align: center">You are signed in as: Amanda Hayden <a href="/">Sign Out</a></p>
+<h3>Add a Student's Semester Dates:</h3>
+<h5>Please enter the student's details and the semester details:</h5>
+
+
+<EditForm Model="@record" OnValidSubmit="@RecordInsert">
+    <table>
+        <tr>
+            <!--Last Name-->
+            <td>
+                <label>Student Last Name: </label>
+            </td>
+            <td style="padding-left:30px;">
+                <input type="text" @bind="record.LastName" required>
+            </td>
+            <td>
+                <label>e.g. Smith </label>
+            </td>
+        </tr>
+        <tr>
+            <!--First Name-->
+            <td>
+                <label>Student First Name:</label>
+            </td>
+            <td style="padding-left:30px;">
+                <input type="text" @bind="record.FirstName" required>
+            </td>
+            <td>
+                <label>e.g. Joanne </label>
+            </td>
+        </tr>
+        <tr>
+            <!--Middle Name-->
+            <td>
+                <label>Student Middle Initial:</label>
+            </td>
+            <td style="padding-left:30px;">
+                <input type="text" @bind="record.MiddleName">
+            </td>
+            <td>
+                <label>e.g. M </label>
+            </td>
+
+        </tr>
+        <!--CalendarYear goes here-->
+        <tr>
+            <td>
+                <!--Semester Number-->
+                <label>Semester Number:</label>
+            </td>
+            <td style="padding-left:30px;">
+                <select name="SemesterNumber" @bind="record.SemesterNumber" required>
+                    <option value=0>Select Semester Number...</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <!--term Start Date-->
+                <label>Term Start Date:</label>
+            </td>
+            <td style="padding-left:30px;">
+                <input type="date" @bind="record.StartDate" required min="1900-01-01" max="3000-01-01">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <!--term Start Date-->
+                <label>Term End Date:</label>
+            </td>
+            <td style="padding-left:30px;">
+                <input type="date" @bind="record.EndDate" required min="1900-01-01" max="3000-01-01">
+            </td>
+        </tr>
+        <tr>
+            <!--Might need to format this more later-->
+            <td>
+                <input type="reset" value="Clear Form">
+            </td>
+            <td>
+                <input type="submit" value="Add Record"  />
+            </td>
+        </tr>
+    </table>
+
+
+</EditForm>
+
+@code {
+
+    StudentRecord record = new StudentRecord();
+
+    protected async Task RecordInsert()
+    {
+        await RecordService.RecordInsert(record);
+        NavigationManager.NavigateTo("/");
+    }
+
+    //fix the default date
+    protected override void OnInitialized()
+    {
+        DateTime defaultdate = new DateTime(2000, 01, 01);
+        record.StartDate = defaultdate;
+        record.EndDate = defaultdate;
+
+        //record.SemesterNumber = 0;
+
+    }
+
+    void AddRecord()
+    {
+        NavigationManager.NavigateTo("/confirmation");
+    }
+}

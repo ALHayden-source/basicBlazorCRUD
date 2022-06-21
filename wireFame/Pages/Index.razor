@@ -1,0 +1,42 @@
+﻿@page "/"
+
+<body>
+    <h3>Sign In</h3><br>
+    <div class="login">
+       <!-- <form id="login" method="get" action="login.php"> -->
+            <table>
+                <tr>
+                    <td>
+                        <label>Email Address: </label>
+                    </td>
+                    <td style="padding-left:30px;">
+                        <input type="text" name="Uname" id="Uname">
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <label>Password:</label>
+                    </td>
+                    <td style="padding-left:30px;">
+                        <input type="Password" name="Pass" id="Pass">
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <input type="reset" name="log" id="log" value="Clear Form">
+                    </td>
+                    <td style="padding-left:30px;">
+
+                       <!-- <input type="button" name="log" id="log" value="Sign In"> -->
+                        <form action="/addrecord">
+                            <input type="submit" value="Sign In" />
+                        </form>
+
+                    </td>
+                </tr>
+            </table>
+        <!--</form>-->
+    </div>
+</body>

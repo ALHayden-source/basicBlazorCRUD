@@ -1,0 +1,76 @@
+﻿@using WireFrame.Data
+@page "/confirmation"
+@inject IRecordService RecordService
+@inject NavigationManager NavigationManager
+
+<p style="text-align: right">You are signed in as: Amanda Hayden <br> <a href="/">Sign Out</a></p>
+<h3>Confirmation</h3>
+<br />
+<p> You have successfully saved a Student-Semester record.</p>
+
+<table>
+    <tr>
+        <!--Last Name-->
+        <td>
+            <label>Student Last Name: </label>
+        </td>
+        <td style="padding-left:30px;">
+        </td>
+    </tr>
+    <tr>
+        <!--First Name-->
+        <td>
+            <label>Student First Name:</label>
+        </td>
+        <td style="padding-left:30px;">
+        </td>
+
+    </tr>
+    <tr>
+        <!--Middle Name-->
+        <td>
+            <label>Student Middle Initial:</label>
+        </td>
+        <td style="padding-left:30px;">
+        </td>
+
+    </tr>
+    <!--CalendarYear goes here-->
+    <tr>
+        <td>
+            <!--Semester Number-->
+            <label>Semester Number:</label>
+        </td>
+        <td style="padding-left:30px;">
+        </td>
+
+    </tr>
+    <tr>
+        <td>
+            <!--term Start Date-->
+            <label>Term Start Date:</label>
+        </td>
+        <td style="padding-left:30px;">
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <!--term End Date-->
+            <label>Term End Date:</label>
+        </td>
+        <td style="padding-left:30px;">
+        </td>
+    </tr>
+
+</table>
+<form action="/addrecord">
+    <input type="submit" value="Add another Record" />
+    </form>
+
+@code {
+    IEnumerable<StudentRecord> records;
+    protected override async Task OnInitializedAsync()
+    {
+        records = await RecordService.RecordList();
+    }
+}
